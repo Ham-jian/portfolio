@@ -92,6 +92,10 @@ $(document).ready(function(){
     $('.pop_body').scrollTop(0);
   });
 
+  $(".s-hover").click(function(){
+    $(".scent_hover").toggle(400);
+  });
+
 
   /* Web Design Modal============================================ */
   //각 목록을 클릭했을때

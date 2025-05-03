@@ -90,7 +90,7 @@ body{
 header{
   position: fixed;
   left: 0;
-  top: -64px;
+  top: -51px;
   z-index: 3;
   transition: all .3s;
   width: 100%;
@@ -99,7 +99,7 @@ header{
   margin: auto;
   flex-flow: column nowrap;
 }
-header.fixed{top: 0;}
+header.fixed{top: 0px;}
 
 nav{
   display: flex;
@@ -318,6 +318,7 @@ main{
   background-color: #fff;
   border-radius: 20px;
 }
+#about{position: relative;}
 .title h2{
   font-size: 40px;
   font-family: "PPMori-Regular";
@@ -331,7 +332,11 @@ main{
   background-color: #C2C2C2;
   border: 0;
 }
-.a-inner, .p-inner{
+.a-inner{
+  padding: 58px 42px 150px;
+  display: flex;
+}
+.p-inner{
   padding: 58px 42px 100px;
   display: flex;
 }
@@ -362,6 +367,63 @@ main{
   margin-bottom: 80px;
 }
 
+/* ABOUT HOVER */
+.scent{
+  position: absolute;
+  bottom: 50px;
+}
+.scent p{
+  width: 70px;
+  height: 70px;
+  background-color: #EBFF00;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.scent p::after{
+  position: absolute;
+  content: attr(data-text);
+  font-size: 30px;
+}
+.s-hover:hover{
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+}
+.s-hover:hover::after {
+  animation: icon 0.5s ease forwards;
+}
+@keyframes icon {
+  0%{rotate: 0;}
+  50%{rotate: 80deg;}
+  75%{rotate: -10deg;}
+  100%{rotate: 0;}
+}
+.scent_hover{
+  position: absolute;
+  bottom: 90px;
+  left: 0;
+  background-color: #EBFF00;
+  padding: 28px;
+  border-radius: 20px;
+  /* opacity: 0; */
+  display: none;
+}
+.scent_hover img{
+  border-radius: 20px;
+  width: 600px;
+}
+.scent_hover h6{
+  font-size: 20px;
+  margin: 24px 10px 10px;
+}
+.scent-text span{
+  /* color: #000; */
+  margin: 0 10px;
+}
+.scent-text span:nth-child(1){
+  margin-bottom: 10px;
+}
 
 /* PUBLISING */
 .p-inner{
