@@ -65,6 +65,9 @@ body{
   position: relative;
   transition: all .5s;
 }
+b{
+  font-weight: 600;
+}
 .text:hover{
   background-color: #EBFF00;
 }
