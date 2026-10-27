@@ -44,7 +44,7 @@
     .content-text ul .li-none{
       display: none;/* 비짓부산 Work 내용 뺌 */
     }
-    
+
     /* btn */
     .btn{
       font-size: 16px;
@@ -202,7 +202,7 @@
       height: 38px;
       font-size: 14px;
     }
-    .btn-group a:nth-child(2), .btn-group a:nth-child(3){
+    .btn-group .btn:not(:last-child){
       margin-right: 10px;
     }
     .btn::after {
@@ -232,10 +232,10 @@
       object-fit: fill;
       width:768px;
     }
-    
+
     /*닫기버튼*/
-    .btn_close i{
-      color: #C2C2C2;
+    .btn_close svg{
+      fill: #C2C2C2;
     }
 
     /* FOOTER */
@@ -258,3 +258,490 @@
       font-size: 14px;
     }
   }
+
+
+/* _______________________________Tablet 보정 (768~1023) */
+/* 카드 높이가 고정이라 태그가 여러 줄이면 버튼이 잘림 → 자동 높이(같은 줄 카드는 stretch로 높이 맞춤)
+   버튼 3개 묶음(GO TO GITHUB 등) 글자 잘림 보정 */
+@media screen and (min-width: 768px) and (max-width: 1023px){
+  .content-box,
+  .u-inner .content-box{
+    height: auto;
+  }
+  .content-text{
+    padding-bottom: 16px;
+  }
+  .btn-group{
+    gap: 6px;
+  }
+  .btn-group .btn:not(:last-child){
+    margin-right: 0;
+  }
+  .btn-group .btn{
+    font-size: 12px;
+  }
+  .btn-group .btn::after{
+    transform: translateY(-200%);
+  }
+  .btn-group .btn:hover::after{
+    transform: translateY(10%);
+  }
+  .btn-group .btn:hover .hover{
+    transform: translateY(200%);
+  }
+}
+
+
+/* _______________________________모달 반응형 (1199 이하) */
+/* 상세 모달이 1200px 고정폭이라 태블릿·모바일에서 이미지 오른쪽이 잘렸음 → 화면 폭에 맞춤 */
+@media screen and (max-width: 1199px){
+  #popup, #popup2, #mpopup{
+    height: 100vh;
+    height: 100dvh;
+  }
+  .pop_body{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+  }
+  .pop>li, .pop2>li, .mpop>li{
+    width: 100%;
+  }
+  .pop_body li img,
+  .pop2>li.cover img{
+    width: 100%;
+    height: auto;
+  }
+  /* 이솝 상세 'Making Process' 영역 위 GIF: px 위치 → 비율 위치 (1200px 기준 bottom 981 / 400x800) */
+  .pop_img2-3_gif{
+    bottom: 27.2122%;
+    width: 33.3333%;
+    height: auto;
+    aspect-ratio: 1 / 2;
+  }
+  /* 닫기 버튼이 흰 본문 위에 올라오므로 원형 배경 */
+  .btn_close{
+    top: 18px;
+    padding: 6px;
+    opacity: 1;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0px 12px 20px -12px rgba(0, 0, 0, 0.6);
+  }
+  .btn_close svg{
+    width: 30px;
+    height: 30px;
+    fill: #000;
+  }
+}
+
+
+/* _______________________________Mobile */
+/* 767 이하 */
+@media screen and (max-width: 767px){
+
+  /* PC 해상도 안내 팝업은 모바일에서 숨김 */
+  .resolution{
+    display: none !important;
+  }
+
+  /* HEADER======================================== */
+  nav{
+    padding: 14px 20px;
+  }
+  .nav-corner::before{
+    left: 12px;
+  }
+  .nav-corner::after{
+    right: 12px;
+  }
+
+  /* 햄버거 버튼 */
+  .allmenu{
+    display: block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin-right: -8px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .allmenu .trigger{
+    position: absolute;
+    left: 9px;
+    top: 13px;
+    width: 22px;
+    height: 14px;
+  }
+  .allmenu .trigger span{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    border-radius: 2px;
+    transition: top .25s ease, transform .25s ease, opacity .2s ease;
+  }
+  .allmenu .trigger span:nth-child(1){top: 0;}
+  .allmenu .trigger span:nth-child(2){top: 6px;}
+  .allmenu .trigger span:nth-child(3){top: 12px;}
+  .allmenu.active .trigger span:nth-child(1){top: 6px; transform: rotate(45deg);}
+  .allmenu.active .trigger span:nth-child(2){opacity: 0;}
+  .allmenu.active .trigger span:nth-child(3){top: 6px; transform: rotate(-45deg);}
+
+  /* GNB → 드롭다운 */
+  .gnb{
+    position: fixed;
+    top: 72px;
+    left: 12px;
+    right: 12px;
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 12px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+  }
+  header.menu-open .gnb{
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity .25s ease, transform .25s ease, visibility 0s linear 0s;
+  }
+  .gnb li{
+    height: auto;
+  }
+  .gnb li a{
+    width: 100%;
+    height: auto;
+    padding: 15px 20px 13px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  /* MAIN======================================== */
+  main{
+    height: auto;
+    min-height: calc(100vh - 76px);
+    min-height: calc(100svh - 76px);
+    margin: 64px 12px 12px;
+    padding: 72px 20px 96px;
+  }
+  .mt1{
+    /* 타이틀 폭 = 글자크기 x 6.67 → 패널 안쪽 폭에 맞춰 크기 결정 (최대 60px) */
+    --f: min(60px, calc((100vw - 64px) / 7.6));
+    font-size: var(--f);
+    line-height: 1.12;
+    margin-bottom: 30px;
+  }
+  /* EMOJI : PC 비율(지름 1.72em, 우측 -0.81em, 상단 -0.86em) 그대로 축소 */
+  .emoji{
+    width: calc(var(--f) * 1.72);
+    height: calc(var(--f) * 1.72);
+    right: calc(var(--f) * -0.81);
+    top: calc(var(--f) * -0.86);
+    font-size: max(11px, calc(var(--f) * 0.28));
+  }
+  .emoji::after{
+    font-size: calc(var(--f) * 0.5);
+  }
+  .mt2 ul{
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+  .mt2 ul li{
+    font-size: 14px;
+    padding: 9px 14px 7px;
+    margin-bottom: 0;
+  }
+  .mt2 ul li::after{
+    font-size: 20px;
+  }
+  .mt3{
+    gap: 14px;
+  }
+  .mt3 p{
+    width: auto;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .arrow{
+    bottom: 32px;
+    width: 78px;
+    height: 21px;
+    animation: arrow-m 1.2s ease-in-out infinite;
+  }
+  .arrow-svg{
+    background-size: contain;
+  }
+  @keyframes arrow-m {
+    0%, 100%{transform: translate(-50%, 0);}
+    50%{transform: translate(-50%, -10px);}
+  }
+
+  /* SECTION====================================== */
+  #about, #publishing, #mobile, #uxui, #graphic{
+    margin: 0 12px 12px;
+  }
+  .title h2{
+    font-size: 26px;
+    margin-bottom: 14px;
+    padding: 32px 20px 0;
+  }
+
+  /* ABOUT : 4열 → 1열 */
+  .a-inner{
+    flex-direction: column;
+    gap: 32px;
+    padding: 28px 20px 36px;
+  }
+  .a-inner > div{
+    flex: none;
+  }
+  .a-inner div h3{
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+  .a-inner div p{
+    font-size: 16px;
+    margin-bottom: 6px;
+    word-break: keep-all;
+  }
+  .a-inner div p:not(.p-list-title){
+    font-size: 14px;
+  }
+  .p-list{
+    margin-bottom: 12px;
+  }
+  .p-list:last-child{
+    margin-bottom: 0;
+  }
+  .p-inner1, .p-inner2{
+    margin-bottom: 32px;
+  }
+  .part3 .p-inner2, .part4 .p-inner2{
+    margin-bottom: 0;
+  }
+
+  /* ABOUT 사진 팝업 : 절대위치 → 본문 흐름 */
+  .scent{
+    position: static;
+    margin-top: 18px;
+  }
+  .scent p{
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    margin-bottom: 0;
+  }
+  .scent p::after{
+    font-size: 26px;
+  }
+  .scent_hover{
+    position: static;
+    margin-top: 12px;
+    padding: 16px;
+  }
+  .scent_hover img{
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+  }
+  .scent_hover h6{
+    font-size: 16px;
+    margin: 16px 4px 8px;
+  }
+  .scent-text span{
+    margin: 0 4px;
+    font-size: 14px;
+    line-height: 1.6;
+    word-break: keep-all;
+  }
+  .scent-text span:nth-child(1){
+    margin-bottom: 8px;
+  }
+
+  /* 카드 : 2열 압축 → 1열, 고정 높이 해제, hover로만 보이던 버튼 상시 노출 */
+  .p-inner{
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 32px;
+    padding: 24px 16px 36px;
+  }
+  .content-box,
+  .u-inner .content-box{
+    flex: none;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+  }
+  .content-box:hover{
+    box-shadow: none;
+  }
+  .content-box:hover .cb-inner{
+    transform: none;
+  }
+  .content-box img{
+    height: auto;
+    aspect-ratio: 1311 / 798;
+    border-radius: 16px;
+  }
+  .u-inner .content-box img{
+    height: auto;
+    aspect-ratio: 870 / 629;
+  }
+  .content-text{
+    padding: 14px 2px 2px;
+  }
+  .content-text h4{
+    font-size: 16px;
+    line-height: 1.45;
+    margin-bottom: 12px;
+    word-break: keep-all;
+  }
+  .content-text ul{
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .content-text ul li{
+    padding: 6px 11px;
+    font-size: 12px;
+    border-width: 1px;
+  }
+  .content-text ul .li-none{
+    display: none;
+  }
+
+  /* btn */
+  .btn{
+    height: 44px;
+    font-size: 15px;
+  }
+  .btn::after{
+    transform: translateY(-190%);
+  }
+  .btn:hover::after{
+    transform: translateY(10%);
+  }
+  .btn:hover .hover{
+    transform: translateY(190%);
+  }
+  .btn-group{
+    gap: 8px;
+  }
+  .btn-group .btn:not(:last-child){
+    margin-right: 0;
+  }
+  .btn-group .btn{
+    flex: 1 1 0;
+    min-width: 0;
+    font-size: 12px;
+  }
+  .btn-group .btn::after{
+    transform: translateY(-220%);
+  }
+  .btn-group .btn:hover::after{
+    transform: translateY(10%);
+  }
+  .btn-group .btn:hover .hover{
+    transform: translateY(220%);
+  }
+
+  /* 모달 */
+  #popup, #popup2, #mpopup{
+    backdrop-filter: none;
+  }
+  .g_page{
+    top: 12px;
+    left: 12px;
+    padding: 7px 18px;
+    font-size: 14px;
+  }
+  .btn_close{
+    top: 8px;
+    right: 8px;
+  }
+  .m_btn>li{
+    top: auto;
+    bottom: 20px;
+    padding: 9px;
+  }
+  .m_btn>li svg{
+    width: 26px;
+    height: 26px;
+  }
+  .left_btn{left: 12px;}
+  .right_btn{right: 12px;}
+
+  /* FOOTER */
+  footer{
+    height: auto;
+    margin: 0 12px;
+  }
+  .thanks{
+    padding: 64px 0 48px;
+  }
+  .t-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .thanks p:nth-child(1){
+    font-size: min(60px, calc((100vw - 40px) / 8.2));
+    line-height: 1.15;
+  }
+  .thanks a{
+    position: static;
+    transform: none;
+    width: 116px;
+    height: 116px;
+    gap: 8px;
+    font-size: 14px;
+  }
+  .thanks a:hover{
+    gap: 12px;
+  }
+  .bottom{
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 0 32px;
+    font-size: 13px;
+    text-align: center;
+  }
+  .contact{
+    gap: 20px;
+  }
+}
+
+/* 가로로 눕힌 휴대폰(터치 + 낮은 화면)에서도 PC 해상도 안내 숨김 */
+@media screen and (hover: none) and (pointer: coarse) and (max-height: 500px){
+  .resolution{
+    display: none !important;
+  }
+}
+
+/* 560~767 : UX/UI·GRAPHIC 썸네일은 2열 */
+@media screen and (min-width: 560px) and (max-width: 767px){
+  .u-inner{
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 28px 16px;
+  }
+  .u-inner .content-box{
+    width: calc(50% - 8px);
+  }
+}
